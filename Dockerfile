@@ -9,7 +9,7 @@ ENV FOREGO_VERSION v0.16.1
 RUN apk --no-cache add ca-certificates openssl bash tar curl wget
 
 # Install Caddy Server, and middleware: cors, expires, filter, ipfilter, minify, ratelimit, realip
-RUN mkdir -p /tmp/docker && mkdir -p /app && cd /tmp/docker && wget -O caddy.tar.gz "https://caddyserver.com/download/build?os=linux&arch=amd64&features=cors%2Cexpires%2Cfilter%2Cipfilter%2Cminify%2Cratelimit%2Crealip" && \
+RUN mkdir -p /tmp/docker && mkdir -p /app && cd /tmp/docker && wget -O caddy.tar.gz "https://caddyserver.com/download/linux/amd64?plugins=http.cors,http.filter,http.ipfilter,http.minify,http.ratelimit,http.realip&license=personal&telemetry=off" && \
     tar xfz caddy.tar.gz && mv caddy /usr/local/bin && rm -rf /tmp/docker
 
 # Install docker-gen
