@@ -2,8 +2,12 @@
 
 {{ define "proxy_vhost" }}
 	{{ if .Address }}
-		{{ if and .Container.Node.ID .Address.HostPort }}
-	## Using container IP:PORT
+		        {{ if eq .Env.WebSocket "true" }}
+        ## Using websocket
+        proxy / {{ .Container.Node.Address.IP }}:{{ .Address.HostPort }} {
+                websocket
+        }				
+                {{ else if and .Container.Node.ID .Address.HostPort }}	## Using container IP:PORT
 	proxy / {{ .Container.Node.Address.IP }}:{{ .Address.HostPort }} {
 		transparent
 	}
